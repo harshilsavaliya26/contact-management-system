@@ -1,0 +1,8 @@
+@model cn.Models.contactmd
+@{ ViewData["Title"] = "Update Contact"; }
+<div class="page-intro"><span class="section-kicker">CONTACTS</span><h2>Update Contact</h2><p>Make changes to this contact and save the latest information.</p></div>
+<div class="panel-card form-panel narrow-panel">
+<form asp-action="Update" method="post"><input type="hidden" asp-for="id" /><input type="hidden" asp-for="userid" />
+<div class="row g-4"><div class="col-md-6 field-group"><label asp-for="name">Name</label><input asp-for="name" class="form-control modern-input" /></div><div class="col-md-6 field-group"><label asp-for="email">Email</label><input asp-for="email" class="form-control modern-input" /></div><div class="col-md-6 field-group"><label asp-for="contactnumber">Contact number</label><input asp-for="contactnumber" class="form-control modern-input" /></div><div class="col-12 field-group"><label asp-for="address">Address</label><textarea asp-for="address" class="form-control modern-input" rows="4"></textarea></div></div>
+<div class="form-actions"><a asp-action="ViewContact" asp-route-id="@Model.userid" class="btn cancel-btn">Cancel</a><button type="submit" class="btn auth-submit">Update Contact →</button></div></form>
+</div>

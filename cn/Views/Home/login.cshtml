@@ -1,0 +1,62 @@
+@{
+    Layout = null;
+    ViewData["Title"] = "Welcome Back";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login | ContactSphere</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body class="auth-page">
+    <div class="auth-layout">
+        <section class="auth-visual">
+            <div class="auth-logo"><span>CS</span> ContactSphere</div>
+            <div class="visual-content">
+                <div class="mini-badge">✦ SMART CONTACT MANAGEMENT</div>
+                <h1>Everything you need,<br /><span>beautifully organized.</span></h1>
+                <p>Keep your people, conversations and contact details organized in one simple workspace.</p>
+                <div class="feature-row"><div class="feature-dot">✓</div><span>Quickly manage all your contacts</span></div>
+                <div class="feature-row"><div class="feature-dot">✓</div><span>Secure personal account dashboard</span></div>
+                <div class="feature-row"><div class="feature-dot">✓</div><span>Clean and responsive experience</span></div>
+            </div>
+            <div class="auth-copyright">© 2026 ContactSphere · Smart. Simple. Connected.</div>
+        </section>
+
+        <section class="auth-form-wrap">
+            <div class="auth-card">
+                <div class="mobile-auth-logo">CS</div>
+                <div class="auth-heading">
+                    <span class="auth-kicker">WELCOME BACK</span>
+                    <h2>Sign in to your account</h2>
+                    <p>Enter your details to continue to your workspace.</p>
+                </div>
+
+                @if (ViewBag.msg != null)
+                {
+                    <div class="alert alert-danger auth-alert">@ViewBag.msg</div>
+                }
+
+                <form asp-action="Login" asp-controller="Home" method="post">
+                    <div class="field-group">
+                        <label for="email">Email address</label>
+                        <div class="input-shell"><span>✉</span><input id="email" type="email" name="email" class="form-control" placeholder="you@example.com" required /></div>
+                    </div>
+                    <div class="field-group">
+                        <label for="password">Password</label>
+                        <div class="input-shell"><span>●</span><input id="password" type="password" name="password" class="form-control" placeholder="Enter your password" required /></div>
+                    </div>
+                    <button type="submit" class="btn auth-submit w-100">Sign In <span>→</span></button>
+                </form>
+
+                <div class="auth-divider"><span>NEW HERE?</span></div>
+                <a asp-action="Register" class="btn register-outline w-100">Create an account</a>
+            </div>
+        </section>
+    </div>
+
+</body>
+</html>

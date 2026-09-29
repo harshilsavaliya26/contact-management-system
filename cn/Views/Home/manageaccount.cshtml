@@ -1,0 +1,19 @@
+@model cn.Models.usermodel
+@{ ViewData["Title"] = "My Profile"; }
+<div class="page-intro"><span class="section-kicker">ACCOUNT SETTINGS</span><h2>My Profile</h2><p>Update your personal information and keep your account details current.</p></div>
+<div class="panel-card form-panel">
+    <div class="form-profile-head"><div class="large-avatar">@string.Join("", Model.name.Split(' ', StringSplitOptions.RemoveEmptyEntries).Take(2).Select(x => x[0])).ToUpper()</div><div><h3>@Model.name</h3><p>@Model.email</p></div></div>
+    <form asp-action="UpdateAccount" method="post">
+        <input type="hidden" asp-for="id" />
+        <div class="row g-4">
+            <div class="col-md-6 field-group"><label asp-for="name">Full name</label><input asp-for="name" class="form-control modern-input" /></div>
+            <div class="col-md-6 field-group"><label asp-for="email">Email address</label><input asp-for="email" type="email" class="form-control modern-input" /></div>
+            <div class="col-md-6 field-group"><label asp-for="password">Password</label><input asp-for="password" type="password" class="form-control modern-input" /></div>
+            <div class="col-md-6 field-group"><label asp-for="contactnumber">Contact number</label><input asp-for="contactnumber" class="form-control modern-input" /></div>
+            <div class="col-md-6 field-group"><label asp-for="gender">Gender</label><input asp-for="gender" class="form-control modern-input" /></div>
+            <div class="col-md-6 field-group"><label asp-for="city">City</label><input asp-for="city" class="form-control modern-input" /></div>
+            <div class="col-12 field-group"><label asp-for="address">Address</label><textarea asp-for="address" class="form-control modern-input" rows="4"></textarea></div>
+        </div>
+        <div class="form-actions"><a asp-action="Dashboard" asp-route-id="@Model.id" class="btn cancel-btn">Cancel</a><button type="submit" class="btn auth-submit">Save Changes →</button></div>
+    </form>
+</div>

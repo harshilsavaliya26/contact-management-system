@@ -1,0 +1,16 @@
+@using System.Data
+@{ ViewData["Title"] = "My Contacts"; DataTable contacts = ViewBag.ContactData as DataTable; }
+<div class="page-intro intro-row"><div><span class="section-kicker">YOUR NETWORK</span><h2>My Contacts</h2><p>View, update and organize every saved contact.</p></div><a class="btn auth-submit" asp-action="AddContact" asp-route-id="@ViewBag.UserId">＋ Add Contact</a></div>
+<div class="panel-card contacts-panel">
+    @if (contacts.Rows.Count == 0)
+    {
+        <div class="empty-state"><div class="empty-icon">◉</div><h3>No contacts yet</h3><p>Start building your network by adding your first contact.</p><a class="btn auth-submit" asp-action="AddContact" asp-route-id="@ViewBag.UserId">Add First Contact</a></div>
+    }
+    else
+    {
+        <div class="table-responsive"><table class="table contacts-table align-middle"><thead><tr><th>CONTACT</th><th>EMAIL</th><th>PHONE</th><th>ADDRESS</th><th>ACTION</th></tr></thead><tbody>
+        @foreach (DataRow dr in contacts.Rows)
+        { <tr><td><div class="table-person"><div class="mini-avatar">@dr["name"].ToString().Substring(0,1).ToUpper()</div><strong>@dr["name"]</strong></div></td><td>@dr["email"]</td><td>@dr["contactnumber"]</td><td>@dr["address"]</td><td><div class="action-buttons"><a asp-action="Update" asp-route-id="@dr["id"]" asp-route-userid="@ViewBag.UserId" class="edit-link">Edit</a><a asp-action="Delete" asp-route-id="@dr["id"]" asp-route-userid="@ViewBag.UserId" class="delete-link" onclick="return confirm('Delete this contact?')">Delete</a></div></td></tr> }
+        </tbody></table></div>
+    }
+</div>

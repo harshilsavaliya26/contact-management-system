@@ -1,0 +1,52 @@
+@{
+    Layout = null;
+    ViewData["Title"] = "Create Account";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register | ContactSphere</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body class="auth-page">
+    <div class="auth-layout register-layout">
+        <section class="auth-visual">
+            <div class="auth-logo"><span>CS</span> ContactSphere</div>
+            <div class="visual-content">
+                <div class="mini-badge">✦ START YOUR WORKSPACE</div>
+                <h1>Build your own<br /><span>connected space.</span></h1>
+                <p>Create your account and manage your personal contact network with clarity and style.</p>
+                <div class="stat-pills"><div><strong>01</strong><span>Profile</span></div><div><strong>02</strong><span>Contacts</span></div><div><strong>03</strong><span>Control</span></div></div>
+            </div>
+            <div class="auth-copyright">© 2026 ContactSphere · Smart. Simple. Connected.</div>
+        </section>
+
+        <section class="auth-form-wrap register-wrap">
+            <div class="auth-card register-card">
+                <div class="auth-heading">
+                    <span class="auth-kicker">GET STARTED</span>
+                    <h2>Create your account</h2>
+                    <p>Fill in your details to create your personal workspace.</p>
+                </div>
+                <form asp-action="Register" asp-controller="Home" method="post">
+                    <div class="row g-3">
+                        <div class="col-md-6 field-group"><label>Name</label><div class="input-shell"><span>◉</span><input type="text" name="name" class="form-control" placeholder="Full name" required /></div></div>
+                        <div class="col-md-6 field-group"><label>Email</label><div class="input-shell"><span>✉</span><input type="email" name="email" class="form-control" placeholder="you@example.com" required /></div></div>
+                        <div class="col-md-6 field-group"><label>Password</label><div class="input-shell"><span>●</span><input type="password" name="password" class="form-control" placeholder="Create password" required /></div></div>
+                        <div class="col-md-6 field-group"><label>Contact number</label><div class="input-shell"><span>⌕</span><input type="tel" name="contactnumber" class="form-control" placeholder="Phone number" required /></div></div>
+                        <div class="col-md-6 field-group"><label>Gender</label><div class="gender-options"><label><input type="radio" name="gender" value="Male" required /> Male</label><label><input type="radio" name="gender" value="Female" /> Female</label><label><input type="radio" name="gender" value="Other" /> Other</label></div></div>
+                        <div class="col-md-6 field-group"><label>City</label><div class="input-shell"><span>⌖</span><input type="text" name="city" class="form-control" placeholder="Your city" required /></div></div>
+                        <div class="col-12 field-group"><label>Address</label><textarea name="address" class="form-control textarea-control" rows="3" placeholder="Enter your full address" required></textarea></div>
+                    </div>
+                    <button type="submit" class="btn auth-submit w-100 mt-4">Create Account <span>→</span></button>
+                </form>
+                <p class="switch-auth">Already have an account? <a asp-action="Login">Sign in</a></p>
+            </div>
+        </section>
+    </div>
+
+</body>
+</html>

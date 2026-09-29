@@ -1,0 +1,16 @@
+@model cn.Models.contactmd
+@{ ViewData["Title"] = "Add Contact"; }
+<div class="page-intro"><span class="section-kicker">CONTACTS</span><h2>Add New Contact</h2><p>Create a clean contact record for your personal network.</p></div>
+<div class="panel-card form-panel narrow-panel">
+    <div class="form-icon-title"><div class="round-icon">＋</div><div><h3>Contact information</h3><p>All fields are stored in your account contact list.</p></div></div>
+    <form asp-action="AddContact" method="post">
+        <input type="hidden" name="userid" value="@ViewBag.UserId" />
+        <div class="row g-4">
+            <div class="col-md-6 field-group"><label asp-for="name">Name</label><input asp-for="name" class="form-control modern-input" placeholder="Contact name" required /></div>
+            <div class="col-md-6 field-group"><label asp-for="email">Email</label><input asp-for="email" type="email" class="form-control modern-input" placeholder="contact@example.com" required /></div>
+            <div class="col-md-6 field-group"><label asp-for="contactnumber">Contact number</label><input asp-for="contactnumber" class="form-control modern-input" placeholder="Phone number" required /></div>
+            <div class="col-12 field-group"><label asp-for="address">Address</label><textarea asp-for="address" class="form-control modern-input" rows="4" placeholder="Contact address" required></textarea></div>
+        </div>
+        <div class="form-actions"><a asp-action="Dashboard" asp-route-id="@ViewBag.UserId" class="btn cancel-btn">Cancel</a><button type="submit" class="btn auth-submit">Save Contact →</button></div>
+    </form>
+</div>

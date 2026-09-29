@@ -1,0 +1,40 @@
+@using System.Data
+@{
+    ViewData["Title"] = "Dashboard";
+    DataTable data = ViewBag.UserData as DataTable;
+    DataRow u = data.Rows[0];
+    var initials = string.Join("", u["name"].ToString().Split(' ', StringSplitOptions.RemoveEmptyEntries).Take(2).Select(x => x[0])).ToUpper();
+}
+<div class="welcome-banner">
+    <div><span class="section-kicker">GOOD TO SEE YOU</span><h2>Welcome back, @u["name"] 👋</h2><p>Your personal contact management workspace is ready.</p></div>
+    <a class="btn light-action" asp-action="AddContact" asp-route-id="@ViewBag.UserId">＋ Add New Contact</a>
+</div>
+
+<div class="stats-grid">
+    <div class="stat-card"><div class="stat-icon purple">◉</div><div><small>TOTAL CONTACTS</small><strong>@ViewBag.TotalContact</strong><span>Saved in your network</span></div></div>
+    <div class="stat-card"><div class="stat-icon green">✓</div><div><small>PROFILE STATUS</small><strong>Active</strong><span>Your account is ready</span></div></div>
+    <div class="stat-card"><div class="stat-icon orange">⌖</div><div><small>LOCATION</small><strong>@u["city"]</strong><span>Current profile city</span></div></div>
+</div>
+
+<div class="dashboard-grid">
+    <section class="panel-card profile-overview">
+        <div class="panel-heading"><div><span class="section-kicker">ACCOUNT OVERVIEW</span><h3>Personal details</h3></div><a asp-action="ManageAccount" asp-route-id="@ViewBag.UserId">Edit profile →</a></div>
+        <div class="profile-hero"><div class="large-avatar">@initials</div><div><h4>@u["name"]</h4><p>@u["email"]</p><span class="status-badge">● Active member</span></div></div>
+        <div class="detail-grid">
+            <div class="detail-item"><span>Full name</span><strong>@u["name"]</strong></div>
+            <div class="detail-item"><span>Email address</span><strong>@u["email"]</strong></div>
+            <div class="detail-item"><span>Contact number</span><strong>@u["contactnumber"]</strong></div>
+            <div class="detail-item"><span>Gender</span><strong>@u["gender"]</strong></div>
+            <div class="detail-item"><span>City</span><strong>@u["city"]</strong></div>
+            <div class="detail-item"><span>User ID</span><strong>#@u["id"]</strong></div>
+            <div class="detail-item detail-wide"><span>Address</span><strong>@u["address"]</strong></div>
+        </div>
+    </section>
+
+    <section class="panel-card quick-panel">
+        <div class="panel-heading"><div><span class="section-kicker">QUICK ACTIONS</span><h3>Manage workspace</h3></div></div>
+        <a class="quick-action" asp-action="ViewContact" asp-route-id="@ViewBag.UserId"><span class="qa-icon">◉</span><div><strong>View all contacts</strong><small>Browse and manage your saved people</small></div><b>→</b></a>
+        <a class="quick-action" asp-action="AddContact" asp-route-id="@ViewBag.UserId"><span class="qa-icon green">＋</span><div><strong>Add a contact</strong><small>Create a new contact record</small></div><b>→</b></a>
+        <a class="quick-action" asp-action="ManageAccount" asp-route-id="@ViewBag.UserId"><span class="qa-icon orange">◎</span><div><strong>Update profile</strong><small>Keep your personal details current</small></div><b>→</b></a>
+    </section>
+</div>

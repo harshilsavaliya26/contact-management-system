@@ -1,0 +1,62 @@
+﻿@* <form asp-action="InsertData" method="post">
+
+    Full Name :
+    <input type="text" name="fullname" />
+    <br /><br />
+
+    Email :
+    <input type="text" name="email" />
+    <br /><br />
+
+    Contact :
+    <input type="text" name="contactnumber" />
+    <br /><br />
+
+    Address :
+    <input type="text" name="address" />
+    <br /><br />
+
+    <input type="submit" value="Save" />
+
+</form>
+
+<hr />
+
+<table border="1">
+
+    <tr>
+        <th>ID</th>
+        <th>Full Name</th>
+        <th>Email</th>
+        <th>Contact</th>
+        <th>Address</th>
+        <th>Delete</th>
+        <th>Update</th>
+    </tr>
+
+    @foreach (System.Data.DataRow dr in ViewBag.ContactData.Rows)
+    {
+        <tr>
+            <td>@dr["id"]</td>
+            <td>@dr["fullname"]</td>
+            <td>@dr["email"]</td>
+            <td>@dr["contactnumber"]</td>
+            <td>@dr["address"]</td>
+
+            <td>
+                <a asp-action="Delete"
+                       asp-route-id="@dr["id"]">
+                    Delete
+                </a>
+            </td>
+
+            <td>
+                <a asp-action="Update"
+                       asp-route-id="@dr["id"]">
+                    Update
+                </a>
+            </td>
+        </tr>
+    }
+
+</table> *@

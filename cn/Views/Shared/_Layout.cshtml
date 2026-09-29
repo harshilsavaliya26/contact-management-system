@@ -1,0 +1,92 @@
+@using System.Data
+@{
+    DataTable? userData = ViewBag.UserData as DataTable;
+    DataRow? currentUser = userData != null && userData.Rows.Count > 0 ? userData.Rows[0] : null;
+    var userId = ViewBag.UserId ?? (currentUser != null ? currentUser["id"] : null);
+    var userName = currentUser != null ? currentUser["name"]?.ToString() : "User";
+    var userEmail = currentUser != null ? currentUser["email"]?.ToString() : "";
+    var initials = string.Join("", (userName ?? "User").Split(' ', StringSplitOptions.RemoveEmptyEntries).Take(2).Select(x => x[0])).ToUpper();
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ContactSphere</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body class="app-body">
+    <div class="app-shell">
+        <aside class="sidebar" id="sidebar">
+            <div class="brand-area">
+                <div class="brand-mark">CS</div>
+                <div>
+                    <div class="brand-name">ContactSphere</div>
+                    <small>Management System</small>
+                </div>
+            </div>
+
+            <div class="sidebar-label">MAIN MENU</div>
+            <nav class="side-nav">
+                <a asp-controller="Home" asp-action="Dashboard" asp-route-id="@userId" class="side-link @(ViewContext.RouteData.Values["action"]?.ToString() == "Dashboard" ? "active" : "")">
+                    <span class="side-icon">⌂</span><span>Dashboard</span>
+                </a>
+                <a asp-controller="Home" asp-action="ViewContact" asp-route-id="@userId" class="side-link @(ViewContext.RouteData.Values["action"]?.ToString() == "ViewContact" ? "active" : "")">
+                    <span class="side-icon">◉</span><span>My Contacts</span>
+                </a>
+                <a asp-controller="Home" asp-action="AddContact" asp-route-id="@userId" class="side-link @(ViewContext.RouteData.Values["action"]?.ToString() == "AddContact" ? "active" : "")">
+                    <span class="side-icon">＋</span><span>Add Contact</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-label mt-4">ACCOUNT</div>
+            <nav class="side-nav">
+                <a asp-controller="Home" asp-action="ManageAccount" asp-route-id="@userId" class="side-link @(ViewContext.RouteData.Values["action"]?.ToString() == "ManageAccount" ? "active" : "")">
+                    <span class="side-icon">◎</span><span>My Profile</span>
+                </a>
+                <a asp-controller="Home" asp-action="Login" class="side-link logout-link">
+                    <span class="side-icon">↪</span><span>Logout</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-help">
+                <div class="help-icon">?</div>
+                <strong>Need help?</strong>
+                <p>Manage your contacts and account from one place.</p>
+            </div>
+        </aside>
+
+        <div class="main-area">
+            <header class="topbar">
+                <button class="mobile-menu" type="button" onclick="document.getElementById('sidebar').classList.toggle('show')">☰</button>
+                <div class="topbar-title">
+                    <span class="eyebrow">PERSONAL WORKSPACE</span>
+                    <h1>@ViewData["Title"]</h1>
+                </div>
+                <div class="top-user">
+                    <div class="avatar">@initials</div>
+                    <div class="top-user-text">
+                        <strong>@userName</strong>
+                        <small>@userEmail</small>
+                    </div>
+                </div>
+            </header>
+
+            <main class="content-area">
+                @RenderBody()
+            </main>
+
+            <footer class="app-footer">
+                <div><span class="footer-brand">ContactSphere</span> <span>· © 2026 All rights reserved.</span></div>
+                <div>Secure workspace <span class="footer-heart">✦</span> Built for smarter contact management</div>
+            </footer>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
